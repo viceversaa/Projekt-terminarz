@@ -22,9 +22,9 @@ namespace terminarz_projekt.Controllers
         // GET: Register
         public async Task<IActionResult> Index()
         {
-              return _context.Osoby != null ? 
-                          View(await _context.Osoby.ToListAsync()) :
-                          Problem("Entity set 'TerminarzContext.Osoby'  is null.");
+            return _context.Osoby != null ?
+                        View(await _context.Osoby.ToListAsync()) :
+                        Problem("Entity set 'TerminarzContext.Osoby'  is null.");
         }
 
         // GET: Register/Details/5
@@ -48,10 +48,8 @@ namespace terminarz_projekt.Controllers
         // GET: Register/Create
         public IActionResult Create()
         {
-            return View("Index");
+            return View();
         }
-
-
 
         // POST: Register/Create
         // To protect from overposting attacks, enable the specific properties you want to bind to.
@@ -152,14 +150,14 @@ namespace terminarz_projekt.Controllers
             {
                 _context.Osoby.Remove(osoby);
             }
-            
+
             await _context.SaveChangesAsync();
             return RedirectToAction(nameof(Index));
         }
 
         private bool OsobyExists(int id)
         {
-          return (_context.Osoby?.Any(e => e.ID == id)).GetValueOrDefault();
+            return (_context.Osoby?.Any(e => e.ID == id)).GetValueOrDefault();
         }
     }
 }

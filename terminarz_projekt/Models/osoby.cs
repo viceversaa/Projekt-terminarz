@@ -6,8 +6,8 @@
         public string Imie { get; set; }
         public string Nazwisko { get; set; }    
         public string drugie_imie { get; set; }
-        public int plec { get; set; }
-        public DateOnly data_urodzenia { get; set; }
+        public string plec { get; set; }
+        public string data_urodzenia { get; set; }
         public int nr_telefonu { get; set; }
         public string email { get; set; }
         public string Hasło { get; set; }
