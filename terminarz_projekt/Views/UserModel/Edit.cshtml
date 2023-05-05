@@ -1,0 +1,40 @@
+﻿@model terminarz_projekt.Models.UserModel
+
+@{
+    ViewData["Title"] = "Edit";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h1>Edit</h1>
+
+<h4>UserModel</h4>
+<hr />
+<div class="row">
+    <div class="col-md-4">
+        <form asp-action="Edit">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            <input type="hidden" asp-for="ID" />
+            <div class="form-group">
+                <label asp-for="NazwaUżytkownika" class="control-label"></label>
+                <input asp-for="NazwaUżytkownika" class="form-control" />
+                <span asp-validation-for="NazwaUżytkownika" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Hasło" class="control-label"></label>
+                <input asp-for="Hasło" class="form-control" />
+                <span asp-validation-for="Hasło" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <input type="submit" value="Save" class="btn btn-primary" />
+            </div>
+        </form>
+    </div>
+</div>
+
+<div>
+    <a asp-action="Index">Back to List</a>
+</div>
+
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+}
