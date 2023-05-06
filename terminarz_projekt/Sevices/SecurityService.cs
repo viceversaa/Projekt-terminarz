@@ -8,9 +8,9 @@ namespace terminarz_projekt.Sevices
 
         public SecurityService() {
 
-            knownUsers.Add(new UserModel { NazwaUżytkownika = "Bill", Hasło = "bill"});
-            knownUsers.Add(new UserModel { NazwaUżytkownika = "Ala", Hasło = "ala" });
-            knownUsers.Add(new UserModel { NazwaUżytkownika = "Asia", Hasło = "asia" });
+           knownUsers.Add(new UserModel { NazwaUżytkownika = "Bill", Hasło = "bill"});
+            
+
         }
 
         public bool IsValid(UserModel user)
