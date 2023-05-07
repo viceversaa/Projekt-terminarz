@@ -1,0 +1,40 @@
+﻿@using System.Globalization
+@model terminarz_projekt.Models.CalendarModel
+@{
+    CultureInfo culture = new CultureInfo("pl-PL");
+    string formattedDate = DateTime.Now.ToString("d", culture);
+}
+
+<h2>@DateTimeFormatInfo.CurrentInfo.GetMonthName(Model.Month) @Model.Year</h2>
+
+
+<table>
+    <thead>
+        <tr>
+            <th>Poniedziałek</th>
+            <th>Wtorek</th>
+            <th>Środa</th>
+            <th>Czwartek</th>
+            <th>Piątek</th>
+            <th>Sobota</th>
+            <th>Niedziela</th>
+        </tr>
+    </thead>
+    <tbody>
+        @for (int day = 1; day <= Model.DaysInMonth; day++)
+        {
+            if (day == 1 || new DateTime(Model.Year, Model.Month, day).DayOfWeek == DayOfWeek.Monday)
+            {
+                @:<tr>
+            }
+            
+            <td>@day</td>
+            
+            if (new DateTime(Model.Year, Model.Month, day).DayOfWeek == DayOfWeek.Sunday || day == Model.DaysInMonth)
+            {
+                @:</tr>
+            }
+        }
+    </tbody>
+
+    </table>

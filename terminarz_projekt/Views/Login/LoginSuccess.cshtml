@@ -3,15 +3,12 @@
 <div class="text-center">
     <h1 class="display-4">Moje konto</h1>
         
-        <a asp-action="Index">Wyloguj</a>
-
-            <p>Przejdz do kalendarza aby umówić się na jazdę!</p>
-
-<div class="form-group">
-    <form asp-controller="Calendar" asp-action="Calendar">
-    <input type="submit" value="Kalendarz" class="btn btn-primary" />
-
+<div class="btn">
+    <form asp-controller="Calendar" asp-action="Index">
+            <input type="submit" value="Przejdź do terminarza, aby zarezerwować termin" class="btn btn-success" />
     </form>
 </div>
+    <a asp-action="Index">Wyloguj</a>
 </div>
+
 

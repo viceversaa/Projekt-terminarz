@@ -7,6 +7,7 @@ using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
 using terminarz_projekt.Data;
 using terminarz_projekt.Models;
+using terminarz_projekt.Sevices;
 
 namespace terminarz_projekt.Controllers
 {
@@ -65,6 +66,11 @@ namespace terminarz_projekt.Controllers
                 return RedirectToAction(nameof(Index));
             }
             return View(osoby);
+        }
+
+        public IActionResult ProcessRegister()
+        {
+            return View(Index);
         }
 
         // GET: Register/Edit/5

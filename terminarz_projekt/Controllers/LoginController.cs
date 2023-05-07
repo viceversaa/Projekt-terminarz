@@ -14,7 +14,6 @@ namespace terminarz_projekt.Controllers
 
         public IActionResult ProcessLogin(UserModel userModel)
         {
-            /*TerminarzContext terminarzContext = new TerminarzContext();*/
             SecurityService securityServive = new SecurityService();
 
             if(securityServive.IsValid(userModel))
