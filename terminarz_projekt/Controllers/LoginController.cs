@@ -12,17 +12,17 @@ namespace terminarz_projekt.Controllers
             return View();
         }
 
-        public IActionResult ProcessLogin(UserModel userModel)
+        public IActionResult ProcessLogin(Osoby osoby)
         {
             SecurityService securityServive = new SecurityService();
 
-            if(securityServive.IsValid(userModel))
+            if(securityServive.IsValid(osoby))
             {
-                return View("LoginSuccess", userModel);
+                return View("LoginSuccess", osoby);
             }
             else
             {
-                return View("LoginFailure", userModel);
+                return View("LoginFailure", osoby);
             }
         }
     }

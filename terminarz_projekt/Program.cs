@@ -5,18 +5,18 @@ using terminarz_projekt.Data;
 using Microsoft.Extensions.DependencyInjection;
 
 var builder = WebApplication.CreateBuilder(args);
+builder.Services.AddControllersWithViews();
 builder.Services.AddDbContext<TerminarzContext>(options =>
     options.UseSqlServer(builder.Configuration.GetConnectionString("TerminarzContext") ?? throw new InvalidOperationException("Connection string 'TerminarzContext' not found.")));
-var connectionString = builder.Configuration.GetConnectionString("terminarz_projektContextConnection") ?? throw new InvalidOperationException("Connection string 'terminarz_projektContextConnection' not found.");
+//var connectionString = builder.Configuration.GetConnectionString("terminarz_projektContextConnection") ?? throw new InvalidOperationException("Connection string 'terminarz_projektContextConnection' not found.");
 
-builder.Services.AddDbContext<terminarz_projektContext>(options =>
-    options.UseSqlServer(connectionString));
+//builder.Services.AddDbContext<terminarz_projektContext>(options =>
+  //  options.UseSqlServer(connectionString));
 
-builder.Services.AddDefaultIdentity<UserApplication>(options => options.SignIn.RequireConfirmedAccount = true)
-    .AddEntityFrameworkStores<terminarz_projektContext>();
+//builder.Services.AddDefaultIdentity<UserApplication>(options => options.SignIn.RequireConfirmedAccount = true)
+  //  .AddEntityFrameworkStores<terminarz_projektContext>();
 
 // Add services to the container.
-builder.Services.AddControllersWithViews();
 builder.Services.AddRazorPages();
 
 
