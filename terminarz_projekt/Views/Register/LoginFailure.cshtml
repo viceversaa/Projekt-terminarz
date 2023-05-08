@@ -1,4 +1,4 @@
-﻿@model terminarz_projekt.Models.UserModel
+﻿@model terminarz_projekt.Models.Osoby
 
 <div>
     <h4>Nie udało się zalogować</h4>
@@ -7,10 +7,10 @@
     <hr />
     <dl class="row">
         <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.NazwaUżytkownika)
+            @Html.DisplayNameFor(model => model.email)
         </dt>
         <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.NazwaUżytkownika)
+            @Html.DisplayFor(model => model.email)
         </dd>
         <dt class = "col-sm-2">
             @Html.DisplayNameFor(model => model.Hasło)

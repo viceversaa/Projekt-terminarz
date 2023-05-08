@@ -28,7 +28,7 @@ namespace terminarz_projekt.Migrations
                     table.PrimaryKey("PK_Osoby", x => x.ID);
                 });
 
-            migrationBuilder.CreateTable(
+           /* migrationBuilder.CreateTable(
                 name: "UserModel",
                 columns: table => new
                 {
@@ -40,7 +40,7 @@ namespace terminarz_projekt.Migrations
                 constraints: table =>
                 {
                     table.PrimaryKey("PK_UserModel", x => x.ID);
-                });
+                });*/
         }
 
         protected override void Down(MigrationBuilder migrationBuilder)
@@ -48,8 +48,8 @@ namespace terminarz_projekt.Migrations
             migrationBuilder.DropTable(
                 name: "Osoby");
 
-            migrationBuilder.DropTable(
-                name: "UserModel");
+            /*migrationBuilder.DropTable(
+                name: "UserModel");*/
         }
     }
 }

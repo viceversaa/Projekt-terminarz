@@ -8,6 +8,9 @@ using Microsoft.EntityFrameworkCore;
 using terminarz_projekt.Data;
 using terminarz_projekt.Models;
 using terminarz_projekt.Sevices;
+using System.Linq;
+using Microsoft.Data.SqlClient;
+using NuGet.Protocol.Plugins;
 
 namespace terminarz_projekt.Controllers
 {
@@ -19,6 +22,12 @@ namespace terminarz_projekt.Controllers
         {
             _context = context;
         }
+
+        public IActionResult RegisterPanel()
+        {
+            return View();
+        }
+
 
         // GET: Register
         public async Task<IActionResult> Index()
@@ -68,10 +77,6 @@ namespace terminarz_projekt.Controllers
             return View(osoby);
         }
 
-        public IActionResult ProcessRegister()
-        {
-            return View(Index);
-        }
 
         // GET: Register/Edit/5
         public async Task<IActionResult> Edit(int? id)
@@ -161,9 +166,38 @@ namespace terminarz_projekt.Controllers
             return RedirectToAction(nameof(Index));
         }
 
-        private bool OsobyExists(int id)
+        /*private bool OsobyExists(int id)
         {
             return (_context.Osoby?.Any(e => e.ID == id)).GetValueOrDefault();
+        }*/
+
+        private bool OsobyExists(int id)
+        {
+                return (_context.Osoby?.Any(e => e.ID == id)).GetValueOrDefault();
+           
         }
+
+
+        private bool DataExists(string email, string Hasło)
+        {
+            return (_context.Osoby?.Any(e => e.email == email && e.Hasło == Hasło)).GetValueOrDefault();
+
+        }
+
+        public IActionResult ProcessRegister(Osoby osoby)
+         {
+        
+
+            if (DataExists(osoby.email, osoby.Hasło))
+             {
+                return View("LoginSuccess", osoby);
+             }
+             else
+             {
+                 return View("LoginFailure", osoby);
+             }
+             
+         }
+
     }
 }
