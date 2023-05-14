@@ -2,11 +2,17 @@
 using Microsoft.AspNetCore.Mvc;
 using terminarz_projekt.Data;
 using terminarz_projekt.Models;
+using terminarz_projekt.Migrations;
+using terminarz_projekt.Sevices;
+using System.Linq;
+using Microsoft.Data.SqlClient;
+using NuGet.Protocol.Plugins;
 
 namespace terminarz_projekt.Controllers
 { 
     public class CalendarController : Controller
     {
+        private readonly TerminarzContext _context;
         public ActionResult Index()
         {
             // Pobierz aktualną datę
@@ -30,7 +36,31 @@ namespace terminarz_projekt.Controllers
             return RedirectToAction("Index");
         }
 
-        
+        public ActionResult Search ()
+        {
+            return View();
+        }
+
+        private bool LessonData(string typ_zajec, string dzien_data)
+        {
+                return (_context.CalendarModel?.Any(e => e.typ_zajec == typ_zajec && e.dzien_data == dzien_data)).GetValueOrDefault();
+                   
+        }
+
+        public IActionResult ProcessSearch(CalendarModel lekcje)
+        { 
+
+            if (LessonData(lekcje.typ_zajec, lekcje.dzien_data))
+            {
+                return View("Search", lekcje);
+            }
+            else
+            {
+                return View("Fail", lekcje);
+            }
+            
+
+        }
 
     }
 }

@@ -23,7 +23,7 @@ namespace terminarz_projekt.Controllers
             _context = context;
         }
 
-        public IActionResult RegisterPanel()
+        public IActionResult LoginPanel()
         {
             return View();
         }
@@ -61,6 +61,11 @@ namespace terminarz_projekt.Controllers
             return View();
         }
 
+        public IActionResult Success()
+        {
+            return View();
+        }
+
         // POST: Register/Create
         // To protect from overposting attacks, enable the specific properties you want to bind to.
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
@@ -74,7 +79,7 @@ namespace terminarz_projekt.Controllers
                 await _context.SaveChangesAsync();
                 return RedirectToAction(nameof(Index));
             }
-            return View(osoby);
+            return View("Success");
         }
 
 
@@ -184,7 +189,7 @@ namespace terminarz_projekt.Controllers
 
         }
 
-        public IActionResult ProcessRegister(Osoby osoby)
+        public IActionResult ProcessLogin(Osoby osoby)
          {
         
 
@@ -198,6 +203,7 @@ namespace terminarz_projekt.Controllers
              }
              
          }
+
 
     }
 }

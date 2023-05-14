@@ -27,29 +27,12 @@ namespace terminarz_projekt.Migrations
                 {
                     table.PrimaryKey("PK_Osoby", x => x.ID);
                 });
-
-           /* migrationBuilder.CreateTable(
-                name: "UserModel",
-                columns: table => new
-                {
-                    ID = table.Column<int>(type: "int", nullable: false)
-                        .Annotation("SqlServer:Identity", "1, 1"),
-                    NazwaUżytkownika = table.Column<string>(type: "nvarchar(max)", nullable: false),
-                    Hasło = table.Column<string>(type: "nvarchar(max)", nullable: false)
-                },
-                constraints: table =>
-                {
-                    table.PrimaryKey("PK_UserModel", x => x.ID);
-                });*/
         }
 
         protected override void Down(MigrationBuilder migrationBuilder)
         {
             migrationBuilder.DropTable(
                 name: "Osoby");
-
-            /*migrationBuilder.DropTable(
-                name: "UserModel");*/
         }
     }
 }

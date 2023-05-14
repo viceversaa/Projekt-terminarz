@@ -1,0 +1,16 @@
+﻿@using static terminarz_projekt.Controllers.RegisterController
+@model terminarz_projekt.Views.Register.SuccessModel
+@{
+}
+
+<div class="text-center">
+<h1> Gratulację! Zostałeś zarejestrowany w naszym systemie! </h1>
+<h1> Zaloguj się aby zarezerwować termin!</h1>
+</div>
+
+<div class="text-center">
+    <form asp-controller="Register" asp-action="LoginPanel">
+        <input type="submit" value="Zaloguj się" class="btn btn-success" />
+    </form>
+
+</div>

@@ -2,6 +2,7 @@
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using terminarz_projekt.Data;
 
@@ -10,9 +11,10 @@ using terminarz_projekt.Data;
 namespace terminarz_projekt.Migrations
 {
     [DbContext(typeof(TerminarzContext))]
-    partial class TerminarzContextModelSnapshot : ModelSnapshot
+    [Migration("20230514190902_CalendarMigration")]
+    partial class CalendarMigration
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder

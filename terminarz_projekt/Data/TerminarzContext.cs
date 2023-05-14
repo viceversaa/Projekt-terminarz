@@ -16,5 +16,6 @@ namespace terminarz_projekt.Data
 
         public DbSet<terminarz_projekt.Models.UserModel> UserModel { get; set; } = default!;
         public DbSet<terminarz_projekt.Models.Osoby> Osoby { get; set; } = default!;
+        public DbSet<terminarz_projekt.Models.CalendarModel> CalendarModel { get; set; } = default!;
     }
 }

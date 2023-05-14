@@ -1,14 +1,15 @@
 ﻿@using System.Globalization
 @model terminarz_projekt.Models.CalendarModel
+
 @{
     CultureInfo culture = new CultureInfo("pl-PL");
     string formattedDate = DateTime.Now.ToString("d", culture);
 }
 
-<h2>@DateTimeFormatInfo.CurrentInfo.GetMonthName(Model.Month) @Model.Year</h2>
+<h2 class="text-center">@DateTimeFormatInfo.CurrentInfo.GetMonthName(Model.Month) @Model.Year</h2>
 
 
-<table>
+<table align="center">
     <thead>
         <tr>
             <th>Poniedziałek</th>
@@ -40,6 +41,29 @@
     </table>
 
 
+
+    <div class="text-center">
+        <form asp-action="ProcessSearch">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+
+            <div class="form-group">
+                <label asp-for="typ_zajec" class="control-label">Jazda grupowa/lonża</label>
+                <input asp-for="typ_zajec" class="form-control" />
+                <span asp-validation-for="typ_zajec" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="dzien_data" class="control-label">Data zajęć (np. 2023-05-01)</label>
+                <input asp-for="dzien_data" class="form-control"/>
+                <span asp-validation-for="dzien_data" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <input type="submit" value="Sprawdź dostępne terminy" class="btn btn-primary" />
+            </div>
+        </form>
+    </div>
+</div>
+
+
     <div>
-    <a asp-controller="Register" asp-action="LoginSuccess">Powrót do mojego konta</a>
+    <a asp-controller="Register" asp-action="RegisterPanel">Powrót do mojego konta</a>
 </div>
