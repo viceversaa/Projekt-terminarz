@@ -13,6 +13,11 @@ namespace terminarz_projekt.Controllers
     public class CalendarController : Controller
     {
         private readonly TerminarzContext _context;
+
+        public CalendarController(TerminarzContext context)
+        {
+            _context = context;
+        }
         public ActionResult Index()
         {
             // Pobierz aktualną datę

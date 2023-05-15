@@ -77,7 +77,7 @@ namespace terminarz_projekt.Controllers
             {
                 _context.Add(osoby);
                 await _context.SaveChangesAsync();
-                return RedirectToAction(nameof(Index));
+                //return RedirectToAction(nameof(Index));
             }
             return View("Success");
         }
@@ -195,6 +195,11 @@ namespace terminarz_projekt.Controllers
 
             if (DataExists(osoby.email, osoby.Hasło))
              {
+                if(osoby.email == "kierownik" && osoby.Hasło == "kierownik")
+                {
+                    return RedirectToAction(nameof(Index));
+                }
+                else
                 return View("LoginSuccess", osoby);
              }
              else
