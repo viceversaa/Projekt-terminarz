@@ -28,6 +28,10 @@ namespace terminarz_projekt.Controllers
             return View();
         }
 
+        public IActionResult LoginSuccess()
+        {
+            return View();
+        }
 
         // GET: Register
         public async Task<IActionResult> Index()

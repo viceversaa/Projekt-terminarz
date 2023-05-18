@@ -7,6 +7,7 @@ using terminarz_projekt.Sevices;
 using System.Linq;
 using Microsoft.Data.SqlClient;
 using NuGet.Protocol.Plugins;
+using Microsoft.EntityFrameworkCore;
 
 namespace terminarz_projekt.Controllers
 { 
@@ -17,6 +18,13 @@ namespace terminarz_projekt.Controllers
         public CalendarController(TerminarzContext context)
         {
             _context = context;
+        }
+
+        public async Task<IActionResult> Search()
+        {
+            return _context.CalendarModel != null ?
+                        View(await _context.CalendarModel.ToListAsync()) :
+                        Problem("Entity set 'TerminarzContext.CalendarModel'  is null.");
         }
         public ActionResult Index()
         {
@@ -41,11 +49,6 @@ namespace terminarz_projekt.Controllers
             return RedirectToAction("Index");
         }
 
-        public ActionResult Search ()
-        {
-            return View();
-        }
-
         private bool LessonData(string typ_zajec, string dzien_data)
         {
                 return (_context.CalendarModel?.Any(e => e.typ_zajec == typ_zajec && e.dzien_data == dzien_data)).GetValueOrDefault();
@@ -65,6 +68,11 @@ namespace terminarz_projekt.Controllers
             }
             
 
+        }
+
+        public IActionResult LessonList()
+        {
+            return View();
         }
 
     }
