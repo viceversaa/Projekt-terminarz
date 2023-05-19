@@ -1,0 +1,67 @@
+﻿@using static terminarz_projekt.Controllers.CalendarController
+@model terminarz_projekt.Models.CalendarModel
+
+@{
+    ViewData["Title"] = "Create";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h4>Panel zarządzania terminami</h4>
+<hr />
+<div class="row">
+    <div class="col-md-4">
+        <form asp-action="Create">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+
+            <div class="form-group">
+                <label asp-for="typ_zajec" class="control-label">Ty zajęć</label>
+                <input asp-for="typ_zajec" class="form-control" />
+                <span asp-validation-for="typ_zajec" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="pracownik" class="control-label">Pracownik</label>
+                <input asp-for="pracownik" class="form-control" />
+                <span asp-validation-for="pracownik" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="dzien_data" class="control-label">Data (RRRR.MM.DD)</label>
+                <input asp-for="dzien_data" class="form-control" />
+                <span asp-validation-for="dzien_data" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="godzina_od" class="control-label">Godzina od</label>
+                <input asp-for="godzina_od" class="form-control" />
+                <span asp-validation-for="godzina_od" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="godzina_do" class="control-label">Godzina do</label>
+                <input asp-for="godzina_do" class="form-control" type="date"/>
+                <span asp-validation-for="godzina_do" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="status" class="control-label">Status</label>
+                <input asp-for="status" class="form-control" />
+                <span asp-validation-for="status" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <input type="submit" value="Utwórz nowy termin zajęć" class="btn btn-primary" />
+            </div>
+        </form>
+    </div>
+</div>
+
+
+<div class="form-group">
+    <form  asp-controller="Register" asp-action="Index">
+        <input type="submit" value="Wróć do edytowania listy klientów" class="btn btn-primary" />
+
+    </form>
+</div>
+
+<div>
+    <a asp-controller="Home" asp-action="Index">Powrót do strony głównej</a>
+</div>
+
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+}

@@ -1,7 +1,7 @@
 ﻿@model IEnumerable<terminarz_projekt.Models.CalendarModel>
 
 @{
-    ViewData["Title"] = "SearchLessonKierowniku";
+    ViewData["Title"] = "SearchLesson";
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
@@ -34,7 +34,7 @@
             <th>
                 @Html.DisplayNameFor(model => model.status)
             </th>
-
+           
             <th></th>
         </tr>
     </thead>
@@ -63,12 +63,6 @@
                 <td>
                     @Html.DisplayFor(modelItem => item.status)
                 </td>
-
-                <td>
-                    <a asp-action="Edit" asp-route-id="@item.ID">Edit</a> |
-                    <a asp-action="Details" asp-route-id="@item.ID">Details</a> |
-                    <a asp-action="Delete" asp-route-id="@item.ID">Delete</a>
-                </td>
             </tr>
         }
 
@@ -83,5 +77,5 @@
     </form>
 </div>
 <div>
-    <a asp-action="LoginPanel">Wyloguj</a>
+<a asp-action="LoginPanel">Wyloguj</a>
 </div>

@@ -8,6 +8,7 @@ using System.Linq;
 using Microsoft.Data.SqlClient;
 using NuGet.Protocol.Plugins;
 using Microsoft.EntityFrameworkCore;
+using System.Globalization;
 
 namespace terminarz_projekt.Controllers
 { 
@@ -55,12 +56,12 @@ namespace terminarz_projekt.Controllers
                    
         }
 
-        public IActionResult ProcessSearch(CalendarModel lekcje)
+        public async Task<IActionResult> ProcessSearch(CalendarModel lekcje)
         { 
 
             if (LessonData(lekcje.typ_zajec, lekcje.dzien_data))
             {
-                return View("Search", lekcje);
+                return View("SearchLesson", await _context.CalendarModel.Where(e => e.typ_zajec == lekcje.typ_zajec && e.dzien_data == lekcje.dzien_data).ToListAsync());
             }
             else
             {
@@ -70,10 +71,140 @@ namespace terminarz_projekt.Controllers
 
         }
 
-        public IActionResult LessonList()
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public async Task<IActionResult> Create([Bind("ID,typ_zajec,pracownik,dzien_data,godzina_od,godzina_do,status")] IEnumerable<CalendarModel> calendar)
+        {
+            if (ModelState.IsValid)
+            {
+                _context.Add(calendar);
+                await _context.SaveChangesAsync();
+                return RedirectToAction(nameof(Search));
+            }
+            return View();
+        }
+
+
+
+        public async Task<IActionResult> Details(int? id)
+        {
+            if (id == null || _context.CalendarModel == null)
+            {
+                return NotFound();
+            }
+
+            var calendar = await _context.CalendarModel
+                .FirstOrDefaultAsync(m => m.ID == id);
+            if (calendar == null)
+            {
+                return NotFound();
+            }
+
+            return View(calendar);
+        }
+
+        // GET: Register/Create
+        public IActionResult Create()
         {
             return View();
         }
+
+
+        // GET: Register/Edit/5
+        public async Task<IActionResult> Edit(int? id)
+        {
+            if (id == null || _context.CalendarModel == null)
+            {
+                return NotFound();
+            }
+
+            var calendar = await _context.CalendarModel.FindAsync(id);
+            if (calendar == null)
+            {
+                return NotFound();
+            }
+            return View(calendar);
+        }
+
+        // POST: Register/Edit/5
+        // To protect from overposting attacks, enable the specific properties you want to bind to.
+        // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public async Task<IActionResult> Edit(int id, [Bind("ID,typ_zajec,pracownik,dzien_data,godzina_od,godzina_do,status")] CalendarModel calendar)
+        {
+            if (id != calendar.ID)
+            {
+                return NotFound();
+            }
+
+            if (ModelState.IsValid)
+            {
+                try
+                {
+                    _context.Update(calendar);
+                    await _context.SaveChangesAsync();
+                }
+                catch (DbUpdateConcurrencyException)
+                {
+                    if (!EventExists(calendar.ID))
+                    {
+                        return NotFound();
+                    }
+                    else
+                    {
+                        throw;
+                    }
+                }
+                return RedirectToAction(nameof(Index));
+            }
+            return View(calendar);
+        }
+
+        // GET: Register/Delete/5
+        public async Task<IActionResult> Delete(int? id)
+        {
+            if (id == null || _context.CalendarModel == null)
+            {
+                return NotFound();
+            }
+
+            var calendar = await _context.CalendarModel
+                .FirstOrDefaultAsync(m => m.ID == id);
+            if (calendar == null)
+            {
+                return NotFound();
+            }
+
+            return View(calendar);
+        }
+
+        // POST: Register/Delete/5
+        [HttpPost, ActionName("Delete")]
+        [ValidateAntiForgeryToken]
+        public async Task<IActionResult> DeleteConfirmed(int id)
+        {
+            if (_context.CalendarModel == null)
+            {
+                return Problem("Entity set 'TerminarzContext.Osoby'  is null.");
+            }
+            var calendar = await _context.CalendarModel.FindAsync(id);
+            if (calendar != null)
+            {
+                _context.CalendarModel.Remove(calendar);
+            }
+
+            await _context.SaveChangesAsync();
+            return RedirectToAction(nameof(Search));
+        }
+
+
+        private bool EventExists(int id)
+        {
+            return (_context.CalendarModel?.Any(e => e.ID == id)).GetValueOrDefault();
+
+        }
+
 
     }
 }
