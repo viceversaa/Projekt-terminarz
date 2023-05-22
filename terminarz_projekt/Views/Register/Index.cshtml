@@ -5,7 +5,7 @@
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
-<h1>Index</h1>
+<h1>Lista użytkowników</h1>
 
 <p>
     <a asp-action="Create"></a>
@@ -78,7 +78,7 @@
 </table>
 
 <div class="btn">
-    <form asp-controller="Calendar" asp-action="Search">
+    <form asp-controller="Calendar" asp-action="SearchLessonKierowniku">
         <input type="submit" value="Przejdź do terminarza, aby edytować terminy" class="btn btn-success" />
     </form>
 </div>

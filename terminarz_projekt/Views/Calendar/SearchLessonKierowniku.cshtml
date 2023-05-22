@@ -1,14 +1,16 @@
-﻿@model IEnumerable<terminarz_projekt.Models.CalendarModel>
+﻿@using terminarz_projekt.Data;
+@model IEnumerable<terminarz_projekt.Models.CalendarModel>
+
 
 @{
     ViewData["Title"] = "SearchLessonKierowniku";
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
-<h1>Index</h1>
+<h1>Zarządzaj kierowniku!</h1>
 
 <p>
-    <a asp-action="SearchLesson"></a>
+    <a asp-action="Create"></a>
 </p>
 
 
@@ -78,10 +80,10 @@
 </table>
 
 <div class="btn">
-    <form asp-controller="Calendar" asp-action="Index">
-        <input type="submit" value="Przejdź do terminarza, aby edytować terminy" class="btn btn-success" />
+    <form asp-controller="Calendar" asp-action="Create">
+        <input type="submit" value="Dodaj nowy termin" class="btn btn-success" />
     </form>
 </div>
 <div>
-    <a asp-action="LoginPanel">Wyloguj</a>
+    <a asp-controller="Register" asp-action="LoginPanel">Wyloguj</a>
 </div>

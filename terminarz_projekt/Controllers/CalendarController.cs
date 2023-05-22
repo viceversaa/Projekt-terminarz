@@ -21,12 +21,13 @@ namespace terminarz_projekt.Controllers
             _context = context;
         }
 
-        public async Task<IActionResult> Search()
+        public async Task<IActionResult> SearchLessonKierowniku()
         {
             return _context.CalendarModel != null ?
                         View(await _context.CalendarModel.ToListAsync()) :
                         Problem("Entity set 'TerminarzContext.CalendarModel'  is null.");
         }
+
         public ActionResult Index()
         {
             // Pobierz aktualną datę
@@ -73,13 +74,12 @@ namespace terminarz_projekt.Controllers
 
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind("ID,typ_zajec,pracownik,dzien_data,godzina_od,godzina_do,status")] IEnumerable<CalendarModel> calendar)
+        public async Task<IActionResult> Create([Bind("ID,typ_zajec,pracownik,dzien_data,godzina_od,godzina_do,status")] CalendarModel calendar)
         {
             if (ModelState.IsValid)
             {
                 _context.Add(calendar);
                 await _context.SaveChangesAsync();
-                return RedirectToAction(nameof(Search));
             }
             return View();
         }
@@ -108,6 +108,7 @@ namespace terminarz_projekt.Controllers
         {
             return View();
         }
+
 
 
         // GET: Register/Edit/5
@@ -195,7 +196,7 @@ namespace terminarz_projekt.Controllers
             }
 
             await _context.SaveChangesAsync();
-            return RedirectToAction(nameof(Search));
+            return RedirectToAction(nameof(SearchLessonKierowniku));
         }
 
 
@@ -205,6 +206,7 @@ namespace terminarz_projekt.Controllers
 
         }
 
+        
 
     }
 }

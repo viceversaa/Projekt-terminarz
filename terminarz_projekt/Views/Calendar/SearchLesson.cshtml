@@ -5,7 +5,7 @@
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
-<h1>Index</h1>
+<h1>Wyniki wyszukiwania:</h1>
 
 <p>
     <a asp-action="SearchLesson"></a>
@@ -71,11 +71,13 @@
     </tbody>
 </table>
 
+<h2>Aby umówić się na jazdę zadzwoń pod numer telefonu: 111 222 333"</h2>
+
 <div class="btn">
     <form asp-controller="Calendar" asp-action="Index">
-        <input type="submit" value="Przejdź do terminarza, aby edytować terminy" class="btn btn-success" />
+        <input type="submit" value="Przejdź do terminarza, aby zmienić termin" class="btn btn-success" />
     </form>
 </div>
 <div>
-<a asp-action="LoginPanel">Wyloguj</a>
+<a asp-controller = "Register" asp-action="LoginPanel">Wyloguj</a>
 </div>
