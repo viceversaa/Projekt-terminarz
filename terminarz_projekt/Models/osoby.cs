@@ -1,5 +1,8 @@
 ﻿namespace terminarz_projekt.Models
 {
+    /// <summary>
+    /// Model opisujacy osoby. Zawiera podstawowe informacje o uzytkownikach.
+    /// </summary>
     public class Osoby
     {
         public int ID { get; set; }

@@ -1,5 +1,8 @@
 ﻿namespace terminarz_projekt.Models
 {
+    /// <summary>
+    /// Model zawierajacy informacje o dostepnych koniach w stajni.
+    /// </summary>
     public class Konie
     {
         public int ID { get; set; }

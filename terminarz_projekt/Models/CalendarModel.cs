@@ -5,6 +5,9 @@ using System.Collections.Generic;
 
 namespace terminarz_projekt.Models
 {
+    /// <summary>
+    /// Model zawierający informacje o kalendarzu.
+    /// </summary>
     public class CalendarModel
     {
         public int Month { get; set; }

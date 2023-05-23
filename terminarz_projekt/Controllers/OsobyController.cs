@@ -7,38 +7,19 @@ using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
 using terminarz_projekt.Data;
 using terminarz_projekt.Models;
-using terminarz_projekt.Sevices;
-using System.Linq;
-using Microsoft.Data.SqlClient;
-using NuGet.Protocol.Plugins;
 
 namespace terminarz_projekt.Controllers
 {
-    public class RegisterController : Controller
+    /// <summary>
+    /// Kontroler dla modelu Osoby.
+    /// </summary>
+    public class OsobyController : Controller
     {
         private readonly TerminarzContext _context;
 
-        public RegisterController(TerminarzContext context)
+        public OsobyController(TerminarzContext context)
         {
             _context = context;
-        }
-
-        /// <summary>
-        /// Funkcja przejscia do widoku Create.
-        /// </summary>
-        /// <returns>Zwraca widok do LoginPanel w folderze Register.</returns>
-        public IActionResult LoginPanel()
-        {
-            return View();
-        }
-
-        /// <summary>
-        /// Funkcja przejscia do widoku Create.
-        /// </summary>
-        /// <returns>Zwraca widok do LoginSuccess w folderze Register.</returns>
-        public IActionResult LoginSuccess()
-        {
-            return View();
         }
 
         /// <summary>
@@ -47,9 +28,9 @@ namespace terminarz_projekt.Controllers
         /// <returns>Widok listy na temat osob.</returns>
         public async Task<IActionResult> Index()
         {
-            return _context.Osoby != null ?
-                        View(await _context.Osoby.ToListAsync()) :
-                        Problem("Entity set 'TerminarzContext.Osoby'  is null.");
+              return _context.Osoby != null ? 
+                          View(await _context.Osoby.ToListAsync()) :
+                          Problem("Entity set 'TerminarzContext.Osoby'  is null.");
         }
 
         /// <summary>
@@ -77,17 +58,8 @@ namespace terminarz_projekt.Controllers
         /// <summary>
         /// Funkcja przejscia do widoku Create.
         /// </summary>
-        /// <returns>Zwraca widok do Create w folderze Register.</returns>
+        /// <returns>Zwraca widok do Create w folderze Osoby.</returns>
         public IActionResult Create()
-        {
-            return View();
-        }
-
-        /// <summary>
-        /// Funkcja przejscia do widoku Create.
-        /// </summary>
-        /// <returns>Zwraca widok do Success w folderze Register.</returns>
-        public IActionResult Success()
         {
             return View();
         }
@@ -96,7 +68,7 @@ namespace terminarz_projekt.Controllers
         /// Funkcja dodajaca nowy obiekt klasy Osoby.
         /// </summary>
         /// <param name="osoby">Nowy obiekt klasy.</param>
-        /// <returns>Widok pomyslnej rejestracji.</returns>
+        /// <returns>Widok po stworzeniu obiektu.</returns>
         [HttpPost]
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> Create([Bind("ID,Imie,Nazwisko,drugie_imie,plec,data_urodzenia,nr_telefonu,email,Hasło")] Osoby osoby)
@@ -105,11 +77,10 @@ namespace terminarz_projekt.Controllers
             {
                 _context.Add(osoby);
                 await _context.SaveChangesAsync();
-                //return RedirectToAction(nameof(Index));
+                return RedirectToAction(nameof(Index));
             }
-            return View("Success");
+            return View(osoby);
         }
-
 
         //?????????????????????????????????????????????????????????????????????????????????????????????????
         /// <summary>
@@ -210,58 +181,19 @@ namespace terminarz_projekt.Controllers
             {
                 _context.Osoby.Remove(osoby);
             }
-
+            
             await _context.SaveChangesAsync();
             return RedirectToAction(nameof(Index));
         }
 
-        ////// <summary>
+        /// <summary>
         /// Funkcja sprawdzajaca czy istnieje osoba o danym ID.
         /// </summary>
         /// <param name="id">ID obiektu wyszukiwanego.</param>
         /// <returns>Zwraca wartosc True/False czy dany obiekt istnieje.</returns>
         private bool OsobyExists(int id)
         {
-                return (_context.Osoby?.Any(e => e.ID == id)).GetValueOrDefault();
-           
+          return (_context.Osoby?.Any(e => e.ID == id)).GetValueOrDefault();
         }
-
-        /// <summary>
-        /// Funkcja sprawdzajaca czy istnieje osoba o zadanym emmial i Haslo.
-        /// Zastosowana w procesie logowania.
-        /// </summary>
-        /// <param name="email">Wprowadzony przez uzytkownika email.</param>
-        /// <param name="Hasło">Wprowadzone przez uzytkownika haslo.</param>
-        /// <returns>Zwraca wartosc True/False czy dany obiekt istnieje.</returns>
-        private bool DataExists(string email, string Hasło)
-        {
-            return (_context.Osoby?.Any(e => e.email == email && e.Hasło == Hasło)).GetValueOrDefault();
-
-        }
-
-        /// <summary>
-        /// Funkcja logowania w roli kierownika.
-        /// </summary>
-        /// <param name="osoby">Model do sprawdzenia.</param>
-        /// <returns>Widok pomyslnego lub blednego logowania jako kierownik lub funkcje Index.</returns>
-        public IActionResult ProcessLogin(Osoby osoby)
-         {
-            if (DataExists(osoby.email, osoby.Hasło))
-             {
-                if(osoby.email == "kierownik" && osoby.Hasło == "kierownik")
-                {
-                    return RedirectToAction(nameof(Index));
-                }
-                else
-                return View("LoginSuccess", osoby);
-             }
-             else
-             {
-                 return View("LoginFailure", osoby);
-             }
-             
-         }
-
-
     }
 }
