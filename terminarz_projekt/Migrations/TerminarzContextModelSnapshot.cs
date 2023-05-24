@@ -111,26 +111,7 @@ namespace terminarz_projekt.Migrations
                     b.ToTable("Osoby");
                 });
 
-            modelBuilder.Entity("terminarz_projekt.Models.UserModel", b =>
-                {
-                    b.Property<int>("ID")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int");
-
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("ID"), 1L, 1);
-
-                    b.Property<string>("Hasło")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("NazwaUżytkownika")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
-                    b.HasKey("ID");
-
-                    b.ToTable("UserModel");
-                });
+           
 #pragma warning restore 612, 618
         }
     }
